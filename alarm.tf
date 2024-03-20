@@ -1,22 +1,3 @@
-resource "aws_cloudwatch_log_group" "default" {
-  name              = "/aws/lambda/chatbot-sample-lambda"
-  retention_in_days = 7
-}
-
-resource "aws_cloudwatch_log_metric_filter" "default" {
-  name           = "ErrorFromChatbotSampleLambda"
-  pattern        = "Error"
-  log_group_name = aws_cloudwatch_log_group.default.name
-
-  metric_transformation {
-    name          = "ErrorFromChatbotSampleLambda"
-    namespace     = "chatbot-sample-lambda"
-    value         = "1"
-    unit          = "Count"
-    default_value = "0"
-  }
-}
-
 resource "aws_cloudwatch_metric_alarm" "default" {
   alarm_name          = "ErrorFromChatbotSampleLambdaAlarm"
   alarm_description   = "This metric monitors the error from chatbot sample lambda"
